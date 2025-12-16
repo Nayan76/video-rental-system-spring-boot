@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: Rent
+  datasource:
+    url: jdbc:mysql://localhost:3306/rentvideo
+    username: root
+    password: Nayan@2002
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true

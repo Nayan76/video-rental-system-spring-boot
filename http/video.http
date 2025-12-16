@@ -1,0 +1,17 @@
+### Get all videos (Authenticated)
+GET http://localhost:8080/api/videos
+Authorization: Basic Y3VzdG9tZXJAdGVzdC5jb206cGFzc3dvcmQxMjM=
+
+###
+
+### Create video (ADMIN only)
+POST http://localhost:8080/api/videos
+Authorization: Basic YWRtaW5AdGVzdC5jb206YWRtaW4xMjM=
+Content-Type: application/json
+
+{
+  "title": "Inception",
+  "director": "Christopher Nolan",
+  "genre": "Sci-Fi",
+  "available": true
+}
