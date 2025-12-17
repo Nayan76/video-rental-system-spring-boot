@@ -3,9 +3,9 @@ POST http://localhost:8080/api/auth/register
 Content-Type: application/json
 
 {
-  "email": "customer@test.com",
+  "email": "customer1@test.com",
   "password": "password123",
-  "firstName": "Test",
+  "firstName": "John",
   "lastName": "Customer"
 }
 
@@ -16,9 +16,62 @@ POST http://localhost:8080/api/auth/register
 Content-Type: application/json
 
 {
-  "email": "admin@test.com",
+  "email": "admin1@test.com",
   "password": "admin123",
   "firstName": "Admin",
   "lastName": "User",
   "role": "ROLE_ADMIN"
 }
+
+### Login as ADMIN
+
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin1@test.com",
+  "password": "admin123"
+}
+
+### Browse Videos (Authenticated: CUSTOMER + ADMIN)
+GET http://localhost:8080/api/videos
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjFAdGVzdC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTc2NTk5NDU4NSwiZXhwIjoxNzY1OTk4MTg1fQ.J-biOSukAJ-TLEnsLLSbck8PXds3Kzvj513iiyQ1kqs
+
+### Create Video (ADMIN allowed)
+POST http://localhost:8080/api/videos
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjFAdGVzdC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTc2NTk5NTMxOSwiZXhwIjoxNzY1OTk4OTE5fQ.WMOaveEVoC65FluFzjQaqQCxmY70_Vguv8w5Il4UYiU
+Content-Type: application/json
+
+{
+  "title": "Inception",
+  "director": "Christopher Nolan",
+  "genre": "Sci-Fi",
+  "available": true
+}
+
+### Login as CUSTOMER
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "customer1@test.com",
+  "password": "password123"
+}
+
+### Create Video (CUSTOMER forbidden)
+POST http://localhost:8080/api/videos
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b21lcjFAdGVzdC5jb20iLCJyb2xlIjoiUk9MRV9DVVNUT01FUiIsImlhdCI6MTc2NTk5NTcxNSwiZXhwIjoxNzY1OTk5MzE1fQ.vanRrsxYUqTVxiGxHiku4jLexHEnLTMYQNji-x_IcZ0
+
+### Update Video (ADMIN allowed)
+PUT http://localhost:8080/api/videos/7
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbjFAdGVzdC5jb20iLCJyb2xlIjoiUk9MRV9BRE1JTiIsImlhdCI6MTc2NTk5NTkyMywiZXhwIjoxNzY1OTk5NTIzfQ.ca0Qv_Blfufo3-SIG2Kg-aqdNsIobjw2n5bbjAUtWbA
+
+
+### Rent Video (CUSTOMER allowed)
+POST http://localhost:8080/api/rentals/videos/1/return
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b21lcjFAdGVzdC5jb20iLCJyb2xlIjoiUk9MRV9DVVNUT01FUiIsImlhdCI6MTc2NTk5NzM4OSwiZXhwIjoxNzY2MDAwOTg5fQ.B3L3plAP-pUhKzfpyRkKRkk3c-lhxd3s8JzjrgiJ9og
+
+### Return Video (CUSTOMER allowed)
+POST http://localhost:8080/api/rentals/videos/1/return  
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjdXN0b21lcjFAdGVzdC5jb20iLCJyb2xlIjoiUk9MRV9DVVNUT01FUiIsImlhdCI6MTc2NTk5NzM4OSwiZXhwIjoxNzY2MDAwOTg5fQ.B3L3plAP-pUhKzfpyRkKRkk3c-lhxd3s8JzjrgiJ9og
+

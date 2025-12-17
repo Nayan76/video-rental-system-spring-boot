@@ -11,9 +11,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@ActiveProfiles("test")
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
 class AuthControllerTest {
 
     @Autowired
@@ -22,14 +22,15 @@ class AuthControllerTest {
     @Test
     void registerUser_shouldReturn201() throws Exception {
 
+
         String userJson = """
-                {
-                  "email":"%s",
-                  "password": "test123",
-                  "firstName": "JUnit",
-                  "lastName": "User"
-                }
-                """;
+        {
+          "email":"junit-%s@test.com",
+          "password":"test123",
+          "firstName":"JUnit",
+          "lastName":"User"
+        }
+        """.formatted(System.currentTimeMillis());
 
         mockMvc.perform(post("/api/auth/register")
                 .contentType(MediaType.APPLICATION_JSON)

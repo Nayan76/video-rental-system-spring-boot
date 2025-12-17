@@ -5,8 +5,14 @@ spring:
     url: jdbc:mysql://localhost:3306/rentvideo
     username: root
     password: Nayan@2002
+  main:
+    allow-bean-definition-overriding: true
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+jwt:
+  secret: qwertyuiopasdfghjklzxcvbnmqwertyuiop123456
+  expiration: 3600000
